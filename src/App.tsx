@@ -1,28 +1,31 @@
+import { useState } from "react"
 import { Display } from "./components/Display"
 import { Settings } from "./components/Settings"
+import axios from "axios"
+import { Input } from "./components/ui/input"
 
 function App() {
 
-  const text = [
-  {Ascii : "$", Color:{R:99,G:89, B:32}},
-  {Ascii : "$", Color:{R:123,G:0, B:0}},
-  {Ascii : "$", Color:{R:0,G:255, B:0}},
-  {Ascii : "$", Color:{R:0,G:255, B:0}},
-  {Ascii : "\n", Color:{R:0,G:255, B:145}},
-  {Ascii : "$", Color:{R:14,G:85, B:173}},
-  {Ascii : "$", Color:{R:255,G:0, B:0}},
-  {Ascii : "\n", Color:{R:0,G:255, B:123}},
-  {Ascii : "$", Color:{R:255,G:41, B:41}},
-  {Ascii : "$", Color:{R:255,G:0, B:255}},
-  {Ascii : "$", Color:{R:255,G:0, B:255}},
+  let old = [
   {Ascii : "$", Color:{R:0,G:255, B:0}},]
 
-  
+
+  const [text,setText] = useState<{Ascii: string;Color: {R: number;G: number;B: number;};}[]>()
+
+  function handleApi(event : React.ChangeEvent<HTMLInputElement>) {
+    const formData = new FormData()
+    let image = event.target!.files![0];
+    formData.append("image", image)
+    console.log(formData)
+    axios.post("http://localhost:3001/test",formData).then((res) => setText(res["data"]))
+  }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-white">
-      <Display data={text}/>
-      <Settings/>
+    <div className="flex bg-black h-screen w-screen items-center justify-center overflow-hidden">
+      <div className="flex flex-col justify-center">
+        <Display data={text == undefined ? old : text}/>
+        <Input className="" type="file" name="file" onChange={(e) => handleApi(e)}/>
+      </div>
     </div>
   )
 }
