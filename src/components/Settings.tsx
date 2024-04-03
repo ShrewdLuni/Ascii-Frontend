@@ -11,7 +11,7 @@ export const Settings = ({resolutionValue,onResolutionChange,brightnessValue,onB
   return (
     <div className="mt-[5vh] h-[10vh]">
       <div className="flex flex-row gap-x-32 justify-center">
-        <div className="flex flex-col gap-y-10 w-full">
+        <div className="flex flex-col gap-y-10 w-[60vh]">
           <Option text="Resolution" deafaultValue={resolutionValue} maxValue={240} onChange={onResolutionChange} value={resolutionValue} multiplier={1}/>
           <Option text="Brightness" deafaultValue={brightnessValue} maxValue={500} onChange={onBrightnessChange} value={brightnessValue} multiplier={100}/>
         </div>

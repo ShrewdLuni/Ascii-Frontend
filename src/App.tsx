@@ -28,8 +28,8 @@ function App() {
   return (
     <div className="flex bg-black h-screen w-screen items-center justify-center">
       <div className="flex flex-col">
-        <Display displayData={displayData} renderSize={sizes["xs"]}/>
-        <Input className="mt-[2vh]" type="file" name="file" onChange={async (e) => {await setImage(e.target!.files![0]);handleApi()}}/>
+        <Display displayData={displayData} renderSize={sizes["sm"]}/>
+        <Input className="mt-[2vh] max-w-[50vw] self-center" type="file" name="file" onChange={async (e) => {await setImage(e.target!.files![0]);handleApi()}}/>
         <Settings onResolutionChange={async (number : number) => {await setResolution(number);handleApi()}} onBrightnessChange={async (number : number) => {await setBrightness(number);handleApi()}} resolutionValue={resolution} brightnessValue={brightness}/>
       </div>
     </div>
