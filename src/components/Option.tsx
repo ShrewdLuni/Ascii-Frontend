@@ -14,8 +14,8 @@ export const Option = ({text,value,deafaultValue,maxValue,multiplier,onChange} :
   return (
     <div className="grid grid-cols-[30%,45%,25%] gap-x-8 w-[85%] text-white font-bold">
       <p>{text}</p>
-      <Slider value={[value]} defaultValue={[deafaultValue]} max={maxValue} step={1} onValueChange={(value) => onChange(value[0])}/>
-      <Input className="text-black" type="number" value={value/multiplier} onChange={(event) => onChange(event.target.valueAsNumber * multiplier)} step={1/multiplier}/>
+      <Slider value={[value]} defaultValue={[deafaultValue]} max={maxValue} step={1/multiplier} onValueChange={(value) => onChange(value[0])}/>
+      <Input className="text-black" type="number" value={value} step={1/multiplier} onChange={(event) => {onChange(event.target.valueAsNumber);}}/>
     </div>
   )
 }

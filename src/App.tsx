@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Display } from "./components/Display"
 import { Input } from "./components/ui/input"
 
@@ -7,30 +7,37 @@ import { Settings } from "./components/Settings"
 
 function App() {
   const [displayData,setDisplayData] = useState<{Ascii: string;Color: {R: number;G: number;B: number;};}[]>()
-  const sizes = {xs: 1, sm: 2, md: 4, lg: 8, xl: 16}
-
   const [resolution,setResolution] = useState(40)
-  const [brightness,setBrightness] = useState(100)
+  const [renderSize,setRenderSize] = useState(4)
+  const [brightness,setBrightness] = useState(1)
   const [image, setImage] = useState<File | null>(null);
 
-  function handleApi() {
+  useEffect(() => {
+    handleApi();
+  }, [image,resolution,brightness]);
 
-    if(image == null){
-      return
-    }
+  function handleApi() {
     const formData = new FormData()
-    formData.append("image", image)
+    formData.append("image", (image != null) ? image : "null")
     formData.append("resolution", resolution.toString())
     formData.append("brightness", brightness.toString())
-    axios.post("http://localhost:3001/test",formData).then((res) => setDisplayData(res["data"]))
+    console.log(formData)
+    axios.post("http://localhost:3001/test",formData).then((res) => {setDisplayData(res["data"]);console.log(res["data"])})
   }
-
+  //todo one request per second
   return (
-    <div className="flex bg-black h-screen w-screen items-center justify-center">
-      <div className="flex flex-col">
-        <Display displayData={displayData} renderSize={sizes["sm"]}/>
-        <Input className="mt-[2vh] max-w-[50vw] self-center" type="file" name="file" onChange={async (e) => {await setImage(e.target!.files![0]);handleApi()}}/>
-        <Settings onResolutionChange={async (number : number) => {await setResolution(number);handleApi()}} onBrightnessChange={async (number : number) => {await setBrightness(number);handleApi()}} resolutionValue={resolution} brightnessValue={brightness}/>
+    <div className="flex bg-black h-screen w-screen items-center justify-center overflow-hidden p-8">
+      <div className="flex flex-col w-[90%]">
+        <Display displayData={displayData} renderSize={renderSize}/>
+        <Input className="mt-[2vh] max-w-[50vh] self-center" type="file" name="file" onChange={(e) => {setImage(e.target!.files![0]);}}/>
+        <Settings 
+          resolutionValue={resolution} 
+          renderSizeValue={renderSize}
+          brightnessValue={brightness}
+          onResolutionChange={(value : number) => {setResolution(value);}} 
+          onRenderSizeChange={(value : number) => {setRenderSize(value);}}
+          onBrightnessChange={(value : number) => {setBrightness(value);}} 
+        />
       </div>
     </div>
   )
