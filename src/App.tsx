@@ -13,7 +13,11 @@ function App() {
   const [image, setImage] = useState<File | null>(null);
 
   useEffect(() => {
-    handleApi();
+    const delayDebounceFn = setTimeout(() => {
+      handleApi();
+    }, 200)
+
+    return () => clearTimeout(delayDebounceFn)
   }, [image,resolution,brightness]);
 
   function handleApi() {
