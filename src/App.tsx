@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react"
-import { Display } from "./components/Display"
-import { Input } from "./components/ui/input"
-
 import axios from "axios"
+
+import { Display } from "./components/Display"
 import { Settings } from "./components/Settings"
-import { Button } from "./components/ui/button"
+import { ImageInput } from "./components/ImageInput"
+
+import { useEffect, useState } from "react"
 
 function App() {
   
@@ -41,23 +41,8 @@ function App() {
     <div className="flex bg-black h-screen w-screen items-center justify-center overflow-hidden">
       <div className="flex flex-col w-[90%]">
         <Display displayData={displayData} renderSize={renderSize}/>
-        <div className="flex flex-row justify-center">
-          <div className="flex flex-row gap-x-6">
-            <Button className="bg-teal-500 hover:bg-teal-300 text-black text-lg mt-[2vh]" onClick={() => setIsFile(!isFile)}>{isFile ? <p><span className="text-white">File/</span>Link</p> : <p>File<span className="text-white">/Link</span></p>}</Button>
-            {isFile
-            ? <Input className="mt-[2vh] self-center font-bold" type="file" name="file" onChange={(e) => {setImageFile(e.target!.files![0]);}}/>
-            : <Input className="mt-[2vh] self-center font-bold" type="text" placeholder="Image link..." value={imageLink} onChange={(e) => {setImageLink(e.target.value);}}/>
-            }
-          </div>
-        </div>
-        <Settings 
-          resolutionValue={resolution} 
-          renderSizeValue={renderSize}
-          brightnessValue={brightness}
-          onResolutionChange={(value : number) => {setResolution(value);}} 
-          onRenderSizeChange={(value : number) => {setRenderSize(value);}}
-          onBrightnessChange={(value : number) => {setBrightness(value);}} 
-        />
+        <ImageInput isFile={isFile} imageLink={imageLink} setIsFile={setIsFile} setImageLink={setImageLink} setImageFile={setImageFile}/>
+        <Settings resolutionValue={resolution} renderSizeValue={renderSize} brightnessValue={brightness} onResolutionChange={(value : number) => {setResolution(value);}} onRenderSizeChange={(value : number) => {setRenderSize(value);}} onBrightnessChange={(value : number) => {setBrightness(value);}} />
       </div>
     </div>
   )
