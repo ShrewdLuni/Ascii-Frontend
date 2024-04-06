@@ -33,8 +33,7 @@ function App() {
     formData.append("resolution", resolution.toString())
     formData.append("brightness", brightness.toString())
     formData.append("isFile", isFile ? "true" : "false")
-    console.log(formData)
-    axios.post("http://localhost:3001/test",formData).then((res) => {setDisplayData(res["data"]);console.log(res["data"])})
+    axios.post("https://image-to-ascii.up.railway.app/image",formData).then((res) => {setDisplayData(res["data"]);})
   }
   //todo one request per second
   return (
