@@ -7,7 +7,6 @@ import { ImageInput } from "./components/ImageInput"
 import { useEffect, useState } from "react"
 
 function App() {
-  
   const [resolution,setResolution] = useState(40)
   const [renderSize,setRenderSize] = useState(4)
   const [brightness,setBrightness] = useState(1)
@@ -21,7 +20,7 @@ function App() {
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       handleApi();
-    }, 200)
+    }, 500)
 
     return () => clearTimeout(delayDebounceFn)
   }, [imageFile,imageLink,resolution,brightness]);
@@ -35,7 +34,7 @@ function App() {
     formData.append("isFile", isFile ? "true" : "false")
     axios.post("https://image-to-ascii.up.railway.app/image",formData).then((res) => {setDisplayData(res["data"]);})
   }
-  //todo one request per second
+  
   return (
     <div className="flex bg-black h-screen w-screen items-center justify-center overflow-hidden">
       <div className="flex flex-col w-[90%]">
