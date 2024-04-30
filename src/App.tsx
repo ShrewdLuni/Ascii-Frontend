@@ -5,6 +5,7 @@ import { Settings } from "./components/Settings"
 import { ImageInput } from "./components/ImageInput"
 
 import { useEffect, useState } from "react"
+import { Credits } from "./components/Credits"
 
 function App() {
   const [resolution,setResolution] = useState(40)
@@ -32,16 +33,17 @@ function App() {
     formData.append("resolution", resolution.toString())
     formData.append("brightness", brightness.toString())
     formData.append("isFile", isFile ? "true" : "false")
-    axios.post("https://image-to-ascii.up.railway.app/image",formData).then((res) => {setDisplayData(res["data"]);})
+    axios.post("http://localhost:3001/image",formData).then((res) => {setDisplayData(res["data"]);})
   }
   
   return (
-    <div className="flex bg-black h-screen w-screen items-center justify-center overflow-hidden">
-      <div className="flex flex-col w-[90%]">
+    <div className="flex flex-col bg-black h-screen w-screen items-center justify-center overflow-hidden">
+      <div className="flex flex-col w-[90%] h-[80%] justify-center items-center">
         <Display displayData={displayData} renderSize={renderSize}/>
         <ImageInput isFile={isFile} imageLink={imageLink} setIsFile={setIsFile} setImageLink={setImageLink} setImageFile={setImageFile}/>
         <Settings resolutionValue={resolution} renderSizeValue={renderSize} brightnessValue={brightness} onResolutionChange={(value : number) => {setResolution(value);}} onRenderSizeChange={(value : number) => {setRenderSize(value);}} onBrightnessChange={(value : number) => {setBrightness(value);}} />
       </div>
+      <Credits/>
     </div>
   )
 }

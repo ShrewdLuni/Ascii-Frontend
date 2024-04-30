@@ -4,8 +4,8 @@ interface DisplayProps {
 }
 
 export const Display = ({displayData,renderSize} : DisplayProps) => {
-
-  return displayData != undefined && (
+  console.log(displayData)
+  return (displayData != undefined && displayData != null ) && (
     <div className="overflow-scroll no-scrollbar max-h-[50vh] max-w-[90vw] text-center">
       <p className="font-mono font-bold text-[16px]" style={{fontSize: `${renderSize}px`, lineHeight: `${renderSize * 1.5}px`}}>
         {displayData.map((item,i) => {
