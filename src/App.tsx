@@ -21,7 +21,7 @@ function App() {
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       handleApi();
-    }, 500)
+    }, 1000)
 
     return () => clearTimeout(delayDebounceFn)
   }, [imageFile,imageLink,resolution,brightness]);
