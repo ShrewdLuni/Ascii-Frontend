@@ -8,15 +8,15 @@ import { useEffect, useState } from "react"
 import { Credits } from "./components/Credits"
 
 function App() {
-  const [resolution,setResolution] = useState(40)
-  const [renderSize,setRenderSize] = useState(4)
-  const [brightness,setBrightness] = useState(1)
+  const [resolution, setResolution] = useState(40)
+  const [renderSize, setRenderSize] = useState(4)
+  const [brightness, setBrightness] = useState(1)
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imageLink, setImageLink] = useState("")
 
-  const [displayData,setDisplayData] = useState<{Ascii: string;Color: {R: number;G: number;B: number;};}[]>()
+  const [displayData,setDisplayData] = useState<{Ascii: string; Color: {R: number; G: number; B: number;};}[]>()
 
-  const [isFile,setIsFile] = useState(false)
+  const [isFile, setIsFile] = useState(false)
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
@@ -24,7 +24,7 @@ function App() {
     }, 1000)
 
     return () => clearTimeout(delayDebounceFn)
-  }, [imageFile,imageLink,resolution,brightness]);
+  }, [imageFile, imageLink, resolution, brightness]);
 
   function handleApi() {
     const formData = new FormData()

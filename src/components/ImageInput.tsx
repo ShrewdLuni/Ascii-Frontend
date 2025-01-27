@@ -9,7 +9,7 @@ interface ImageInputProps {
   setImageFile: (value : File | null) => void
 }
 
-export const ImageInput = ({isFile,imageLink,setIsFile,setImageLink,setImageFile} : ImageInputProps) => {
+export const ImageInput = ({isFile, imageLink, setIsFile, setImageLink, setImageFile} : ImageInputProps) => {
   return (
     <div className="flex flex-row justify-center">
       <div className="flex flex-row gap-x-6">

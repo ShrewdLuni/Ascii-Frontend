@@ -10,7 +10,7 @@ interface OptionProps {
   onChange: (value: number) => void;
 }
 
-export const Option = ({text,value,deafaultValue,maxValue,multiplier,onChange} : OptionProps) => {
+export const Option = ({text, value, deafaultValue, maxValue, multiplier, onChange} : OptionProps) => {
   return (
     <div className="grid grid-cols-[30%,45%,25%] gap-x-8 w-[85%] text-white font-bold text-right">
       <p>{text}</p>
