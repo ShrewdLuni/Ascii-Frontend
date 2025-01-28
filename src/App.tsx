@@ -18,6 +18,8 @@ function App() {
 
   const [isFile, setIsFile] = useState(false)
 
+  const SERVER_URL = process.env.SERVER_URL || ""
+
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       handleApi();
@@ -33,7 +35,7 @@ function App() {
     formData.append("resolution", resolution.toString())
     formData.append("brightness", brightness.toString())
     formData.append("isFile", isFile ? "true" : "false")
-    axios.post("http://localhost:3001/image",formData).then((res) => {setDisplayData(res["data"]);})
+    axios.post(SERVER_URL,formData).then((res) => {setDisplayData(res["data"]);})
   }
   
   return (
