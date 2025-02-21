@@ -12,4 +12,7 @@ export default defineConfig({
   server: {
     port: 3000,
   },
+  define: {
+    __APP_ENV__: JSON.stringify(process.env.VITE_VERCEL_ENV || "development"),
+  },
 })
