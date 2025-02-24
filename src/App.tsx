@@ -18,7 +18,7 @@ function App() {
 
   const [isFile, setIsFile] = useState(false)
 
-  const SERVER_URL = import.meta.env.SERVER_URL || ""
+  const SERVER_URL = "image-to-ascii.up.railway.app/image"
   
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
